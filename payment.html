@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Display</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6fa;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+    #slideshow {
+      width: 250px;
+      height: 250px;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    #slideshow img {
+      width: 200px;
+      height: 200px;
+    }
+    #count {
+      font-size: 18px;
+      color: #333;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="slideshow"></div>
+  <p>Total Items in Cart: <span id="count">0</span></p>
+
+  <script>
+    // Create image tag
+    let image = document.createElement("img");
+    let maindiv = document.getElementById("slideshow");
+    maindiv.append(image);
+
+    // Generate a QR Code
+    // Replace yourupi@bank with your actual UPI ID and amount as needed
+    const qrData = "upi://pay?pa=7760183432@axl&pn=Ayan Khan&am=250.00";
+    const qrCodeURL = "qrcode.jpg";
+    
+    image.setAttribute("src", qrCodeURL);
+
+    // Show total items in cart
+    const totalPro = document.getElementById("count");
+    let Cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let count = 0;
+    for (let i = 0; i < Cart.length; i++) {
+      count += Cart[i].quantity;
+    }
+    totalPro.textContent = count;
+  </script>
+</body>
+</html>
